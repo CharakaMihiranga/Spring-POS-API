@@ -23,9 +23,10 @@ public class WebAppRootConfig {
     public ModelMapper modelMapper() { return new ModelMapper();}
     @Bean
     public DataSource dataSource() {
+        // Mysql DB source
         var dmds = new DriverManagerDataSource();
         dmds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dmds.setUrl("jdbc:mysql://localhost:3306/sprinpos?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false");
+        dmds.setUrl("jdbc:mysql://localhost:3306/springpos?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false");
         dmds.setUsername("root");
         dmds.setPassword("1234");
         return dmds;
