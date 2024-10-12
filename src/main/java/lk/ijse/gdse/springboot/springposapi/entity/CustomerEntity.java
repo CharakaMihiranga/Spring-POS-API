@@ -1,5 +1,6 @@
 package lk.ijse.gdse.springboot.springposapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,14 +13,16 @@ import java.time.LocalDate;
 @Data
 @Entity
 @Table(name = "customer")
-public class Customer implements SuperEntity {
+public class CustomerEntity implements SuperEntity {
     @Id
     private String id;
     private String name;
     @Column(unique = true, nullable = false)
     private String email;
     private String address;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate updatedAt;
 
     @PrePersist
