@@ -13,16 +13,14 @@ import java.util.List;
 public class Mapping {
     @Autowired
     private ModelMapper modelMapper;
-    // to convert customer dto to customer entity
-    public CustomerEntity convertToCustomerEntity(CustomerDto customerDto ) {
-        return modelMapper.map(customerDto, CustomerEntity.class);
-    }
-    // to convert customer entity to customer dto
-    public CustomerDto convertToCustomerDto(CustomerEntity customerEntity) {
-        return modelMapper.map(customerEntity, CustomerDto.class);
+
+    // Generic method to map one object to another type
+    public <S, T> T map(S source, Class<T> targetClass) {
+        return modelMapper.map(source, targetClass);
     }
 
-    public List<CustomerDto> convertCustomersToList(List<CustomerEntity> customerEntities) {
-        return modelMapper.map(customerEntities, new TypeToken<List<CustomerDto>>(){}.getType());
+    // Generic method to map a list of objects to another type
+    public <S, T> List<T> mapList(List<S> source, Class<T> targetClass) {
+        return modelMapper.map(source, new TypeToken<List<T>>() {}.getType());
     }
 }
