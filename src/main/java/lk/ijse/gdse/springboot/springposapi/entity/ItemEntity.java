@@ -1,5 +1,6 @@
 package lk.ijse.gdse.springboot.springposapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class ItemEntity implements SuperEntity{
    private LocalDate createdAt;
    private LocalDate updatedAt;
    @OneToMany
+   @JsonIgnore
    private List <OrderDetails> orderDetails;
    @PrePersist
     protected void onCreate() {
