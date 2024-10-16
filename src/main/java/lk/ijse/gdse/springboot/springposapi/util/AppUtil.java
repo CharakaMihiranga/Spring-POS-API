@@ -12,12 +12,11 @@ public class AppUtil {
     }
 
     public static String toBase64Pic(MultipartFile pic) {
-        byte [] picBytes = null;
         try{
-            picBytes = pic.getBytes();
+            byte[] picBytes = pic.getBytes();
+            return Base64.getEncoder().encodeToString(picBytes);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return Base64.getEncoder().encodeToString(picBytes);
     }
 }

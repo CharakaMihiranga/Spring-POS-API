@@ -30,7 +30,7 @@ public class CustomerServiceImpl implements CustomerService{
     public void saveCustomer(CustomerDto customerDto) {
         customerDto.setId(AppUtil.generateId("CUS"));
         CustomerEntity savedCustomerEntity = customerDao.save(mapping.map(customerDto, CustomerEntity.class));
-        if (savedCustomerEntity == null && savedCustomerEntity.getId() == null){
+        if (savedCustomerEntity.getId() == null){
             throw new DataPersistFailedException("Can't save the customer");
         }
     }
