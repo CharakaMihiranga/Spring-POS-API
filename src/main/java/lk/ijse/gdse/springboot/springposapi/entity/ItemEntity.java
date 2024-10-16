@@ -13,10 +13,12 @@ import java.util.List;
 @Data
 @Entity
 @Table( name = "item")
-public class Item implements SuperEntity{
+public class ItemEntity implements SuperEntity{
    @Id
    private String code;
    private String name;
+   @Column(columnDefinition = "LONGTEXT")
+   private String itemPic;
    private String description;
    private double price;
    private int qtyOnHand;

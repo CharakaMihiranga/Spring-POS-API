@@ -22,23 +22,20 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 public class CustomerController {
-
     @Autowired
     private final CustomerService customerService;
-
     static Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
     //Save customer
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveCustomer (@RequestBody CustomerDto customer){
-        System.out.println("CustomerEntity: " + customer);
         if (customer == null){
             logger.warn("Invalid request: Customer object is null");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else{
             try {
                 customerService.saveCustomer(customer);
-                logger.info("Customer with ID: {} saved successfully", customer.getId());
+                logger.info("Customer with Email: {} saved successfully", customer.getEmail());
                 return new ResponseEntity<>(HttpStatus.CREATED);
             } catch (DataPersistFailedException e) {
                 logger.error("Failed to save customer: {}", customer, e);

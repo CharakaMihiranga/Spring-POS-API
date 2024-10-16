@@ -12,6 +12,7 @@ import java.time.LocalDate;
 public class ItemDto {
     private String code;
     private String name;
+    private String itemPic;
     private String description;
     private double price;
     private int qtyOnHand;
