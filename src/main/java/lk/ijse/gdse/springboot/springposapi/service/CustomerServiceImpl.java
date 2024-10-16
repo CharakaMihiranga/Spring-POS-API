@@ -28,8 +28,8 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public void saveCustomer(CustomerDto customerDto) {
-        customerDto.setId(AppUtil.createCustomerId());
-        CustomerEntity savedCustomerEntity = customerDao.save(mapping.convertToCustomerEntity(customerDto));
+        customerDto.setId(AppUtil.generateId("CUS"));
+        CustomerEntity savedCustomerEntity = customerDao.save(mapping.map(customerDto, CustomerEntity.class));
         if (savedCustomerEntity == null && savedCustomerEntity.getId() == null){
             throw new DataPersistFailedException("Can't save the customer");
         }
@@ -48,7 +48,7 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public CustomerResponse getSelectedCustomer(String customerId) {
        if (customerDao.existsById(customerId)){
-            return mapping.convertToCustomerDto(customerDao.getById(customerId));
+            return mapping.map(customerDao.getById(customerId), CustomerDto.class);
        } else {
            return new CustomerErrorResponse(0, "CustomerEntity not found");
        }
@@ -56,7 +56,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public List<CustomerDto> getAllCustomers() {
-        return mapping.convertCustomersToList(customerDao.findAll());
+        return mapping.mapList(customerDao.findAll(), CustomerDto.class);
     }
 
     @Override

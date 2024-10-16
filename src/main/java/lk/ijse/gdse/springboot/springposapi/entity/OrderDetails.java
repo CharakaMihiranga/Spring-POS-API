@@ -20,7 +20,7 @@ public class OrderDetails implements SuperEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_code", referencedColumnName = "code", nullable = false)
-    private Item item;
+    private ItemEntity itemEntity;
 
     private int qty;
 
