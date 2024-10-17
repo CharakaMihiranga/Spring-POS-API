@@ -68,6 +68,11 @@ public class OrderServiceImpl implements OrderService{
         orderDetailDao.saveAll(orderEntities);
     }
 
+    @Override
+    public List<OrderDto> getAllOrders() {
+        return mapping.mapList(orderDao.findAll(), OrderDto.class); // map order entities to order dtos and return
+    }
+
     private OrderDetailEntity createOrderDetailEntity(OrderDetailDto dto, OrderEntity order, ItemEntity item) {
         return OrderDetailEntity.builder()
                 .orderEntity(order)
@@ -76,4 +81,5 @@ public class OrderServiceImpl implements OrderService{
                 .unitPrice(dto.getUnitPrice())
                 .build();
     }
+
 }

@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -27,6 +28,10 @@ public class CustomerEntity implements SuperEntity {
     private String email;
 
     private String address;
+
+    @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<OrderEntity> orders;
 
     @JsonIgnore
     @JsonFormat(pattern = "yyyy-MM-dd")

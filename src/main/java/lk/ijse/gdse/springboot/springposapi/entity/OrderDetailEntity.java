@@ -1,5 +1,6 @@
 package lk.ijse.gdse.springboot.springposapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,9 +24,10 @@ public class OrderDetailEntity implements SuperEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "order_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     private OrderEntity orderEntity;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "item_code", referencedColumnName = "code", nullable = false)
     private ItemEntity itemEntity;
 
