@@ -5,12 +5,13 @@ import lk.ijse.gdse.springboot.springposapi.dto.OrderDto;
 import lk.ijse.gdse.springboot.springposapi.exception.CustomerNotFoundException;
 import lk.ijse.gdse.springboot.springposapi.exception.DataPersistFailedException;
 import lk.ijse.gdse.springboot.springposapi.exception.ItemNotFoundException;
-import lk.ijse.gdse.springboot.springposapi.response.OrderResponse;
+import lk.ijse.gdse.springboot.springposapi.exception.OrderNotFoundException;
 import lk.ijse.gdse.springboot.springposapi.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -41,8 +42,15 @@ public class OrderController {
         }
     }
     @GetMapping(value = "/{orderId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public OrderResponse getOrder(@PathVariable("orderId") Long orderId){
-        return orderService.getOrder(orderId);
+    public ResponseEntity<OrderDto> getOrder(@Valid @PathVariable("orderId") Long orderId){
+        try{
+          OrderDto orderDto = orderService.getOrder(orderId);
+          return new ResponseEntity<>(orderDto, HttpStatus.OK);
+        } catch (OrderNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<OrderDto> getAllOrders(){

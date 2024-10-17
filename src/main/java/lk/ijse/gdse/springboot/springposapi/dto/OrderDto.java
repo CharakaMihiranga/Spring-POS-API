@@ -1,7 +1,6 @@
 package lk.ijse.gdse.springboot.springposapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lk.ijse.gdse.springboot.springposapi.response.OrderResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class OrderDto implements SuperDto, OrderResponse {
+public class OrderDto implements SuperDto {
     private Long id;
     private String customerId;
     private List<OrderDetailDto> orderDetailDtos;

@@ -9,6 +9,4 @@ import java.util.List;
 
 @Repository
 public interface OrderDetailDao extends JpaRepository<OrderDetailEntity, Long> {
-    @Query()
-    List<OrderDetailEntity> getOrderDetailEntitiesByOrderEntityId(Long orderId);
 }

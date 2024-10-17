@@ -14,16 +14,13 @@ import lk.ijse.gdse.springboot.springposapi.entity.OrderEntity;
 import lk.ijse.gdse.springboot.springposapi.exception.CustomerNotFoundException;
 import lk.ijse.gdse.springboot.springposapi.exception.DataPersistFailedException;
 import lk.ijse.gdse.springboot.springposapi.exception.ItemNotFoundException;
-import lk.ijse.gdse.springboot.springposapi.response.OrderErrorResponse;
-import lk.ijse.gdse.springboot.springposapi.response.OrderResponse;
+import lk.ijse.gdse.springboot.springposapi.exception.OrderNotFoundException;
 import lk.ijse.gdse.springboot.springposapi.util.Mapping;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -71,14 +68,14 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public OrderResponse getOrder(Long orderId) {
-        Optional<OrderEntity> orderById = orderDao.findById(orderId);
-        if (orderById.isEmpty()) {
-            return new OrderErrorResponse(0, "Order not found");
-        }
-        List<OrderDetailEntity> allODRelatedToOrder = orderDetailDao.getOrderDetailEntitiesByOrderEntityId(orderId);
-        OrderDto orderDto = mapping.map(orderById.get(), OrderDto.class);
-        orderDto.setOrderDetailDtos(mapping.mapList(allODRelatedToOrder, OrderDetailDto.class));
+    public OrderDto getOrder(Long orderId) {
+        OrderEntity orderEntity = orderDao.findById(orderId)
+                .orElseThrow(() -> new OrderNotFoundException("Order not found with ID: " + orderId));
+        OrderDto orderDto = mapping.map(orderEntity, OrderDto.class);
+        List<OrderDetailDto> orderDetailDtos = orderEntity.getOrderDetailEntities().stream()
+                .map(orderDetailEntity -> mapping.map(orderDetailEntity, OrderDetailDto.class))
+                .collect(Collectors.toList());
+        orderDto.setOrderDetailDtos(orderDetailDtos);
         return orderDto;
     }
 
