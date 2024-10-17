@@ -1,5 +1,6 @@
 package lk.ijse.gdse.springboot.springposapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lk.ijse.gdse.springboot.springposapi.response.CustomerResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +16,8 @@ public class CustomerDto implements SuperDto, CustomerResponse {
     private String name;
     private String email;
     private String address;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate updatedAt;
 }

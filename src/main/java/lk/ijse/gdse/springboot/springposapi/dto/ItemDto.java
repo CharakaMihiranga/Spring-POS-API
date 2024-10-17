@@ -1,5 +1,6 @@
 package lk.ijse.gdse.springboot.springposapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lk.ijse.gdse.springboot.springposapi.response.ItemResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +18,8 @@ public class ItemDto implements SuperDto, ItemResponse {
     private String description;
     private double price;
     private int qtyOnHand;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate updatedAt;
 }
