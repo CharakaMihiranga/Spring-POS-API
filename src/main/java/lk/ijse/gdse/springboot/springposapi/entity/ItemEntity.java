@@ -9,32 +9,49 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.List;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Entity
-@Table( name = "item")
-public class ItemEntity implements SuperEntity{
-   @Id
-   private String code;
-   private String name;
-   @Column(columnDefinition = "LONGTEXT")
-   private String itemPic;
-   private String description;
-   private double price;
-   private int qtyOnHand;
-   private LocalDate createdAt;
-   private LocalDate updatedAt;
-   @OneToMany
-   @JsonIgnore
-   private List <OrderDetails> orderDetails;
-   @PrePersist
+@Table(name = "item")
+public class ItemEntity implements SuperEntity {
+
+    @Id
+    @Column(nullable = false, length = 36)
+    private String code;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(columnDefinition = "LONGTEXT")
+    private String itemPic;
+
+    private String description;
+
+    @Column(nullable = false)
+    private double price;
+
+    @Column(nullable = false)
+    private int qtyOnHand;
+
+    @JsonIgnore
+    @Column(updatable = false)
+    private LocalDate createdAt;
+
+    @JsonIgnore
+    private LocalDate updatedAt;
+
+    @OneToMany(mappedBy = "itemEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<OrderDetailsEntity> orderDetailEntities;
+
+    @PrePersist
     protected void onCreate() {
-         this.createdAt = LocalDate.now();
-    }
-   @PreUpdate
-    protected void onUpdate() {
-         this.updatedAt = LocalDate.now();
+        this.createdAt = LocalDate.now();
     }
 
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDate.now();
+    }
 }
