@@ -2,6 +2,7 @@ package lk.ijse.gdse.springboot.springposapi.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -26,7 +27,7 @@ public class OrderEntity implements SuperEntity {
     private CustomerEntity customerEntity;
 
     @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<OrderDetailsEntity> orderDetailEntities;
+    private List<OrderDetailEntity> orderDetailEntities;
 
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal totalAmount;
@@ -43,15 +44,8 @@ public class OrderEntity implements SuperEntity {
     @Column(updatable = false)
     private LocalDate createdAt;
 
-    private LocalDate updatedAt;
-
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDate.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDate.now();
     }
 }

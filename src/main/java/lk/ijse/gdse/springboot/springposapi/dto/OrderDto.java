@@ -14,9 +14,8 @@ import java.util.List;
 @Data
 public class OrderDto {
     private Long id;
-    private Long customerId;
-    private List<OrderDetailDto> orderDetailEntities;
-
+    private String customerId;
+    private List<OrderDetailDto> orderDetailDtos;
     private BigDecimal totalAmount;
     private BigDecimal paidAmount;
     private BigDecimal discount;
@@ -25,6 +24,4 @@ public class OrderDto {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate updatedAt;
 }

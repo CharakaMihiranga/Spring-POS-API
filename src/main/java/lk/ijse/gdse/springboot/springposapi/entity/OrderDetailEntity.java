@@ -2,6 +2,7 @@ package lk.ijse.gdse.springboot.springposapi.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,9 +11,10 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "order_details")
-public class OrderDetailsEntity implements SuperEntity {
+public class OrderDetailEntity implements SuperEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

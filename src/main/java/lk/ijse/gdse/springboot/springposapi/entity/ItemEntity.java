@@ -43,7 +43,7 @@ public class ItemEntity implements SuperEntity {
 
     @OneToMany(mappedBy = "itemEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<OrderDetailsEntity> orderDetailEntities;
+    private List<OrderDetailEntity> orderDetailEntities;
 
     @PrePersist
     protected void onCreate() {
