@@ -17,7 +17,7 @@ import java.util.List;
 public class ItemEntity implements SuperEntity {
 
     @Id
-    @Column(nullable = false, length = 36)
+    @Column(nullable = false)
     private String code;
 
     @Column(nullable = false)

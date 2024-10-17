@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public class CustomerEntity implements SuperEntity {
 
     @Id
-    @Column(nullable = false, length = 36)
+    @Column(nullable = false)
     private String id;
 
     @Column(nullable = false)
