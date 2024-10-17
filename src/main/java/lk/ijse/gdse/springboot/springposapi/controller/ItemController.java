@@ -1,6 +1,6 @@
 package lk.ijse.gdse.springboot.springposapi.controller;
 
-import lk.ijse.gdse.springboot.springposapi.dto.ItemDto;
+import lk.ijse.gdse.springboot.springposapi.dto.impl.ItemDto;
 import lk.ijse.gdse.springboot.springposapi.exception.DataPersistFailedException;
 import lk.ijse.gdse.springboot.springposapi.exception.ItemNotFoundException;
 import lk.ijse.gdse.springboot.springposapi.response.ItemResponse;
@@ -9,7 +9,6 @@ import lk.ijse.gdse.springboot.springposapi.util.AppUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,6 @@ import java.util.List;
 @RequestMapping("/api/v1/item")
 @RequiredArgsConstructor
 public class ItemController {
-    @Autowired
     private final ItemService itemService;
     static Logger logger = LoggerFactory.getLogger(ItemController.class);
     //Save item

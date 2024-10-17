@@ -1,42 +1,37 @@
-package lk.ijse.gdse.springboot.springposapi.service;
+package lk.ijse.gdse.springboot.springposapi.service.impl;
 
 import jakarta.transaction.Transactional;
 import lk.ijse.gdse.springboot.springposapi.dao.CustomerDao;
 import lk.ijse.gdse.springboot.springposapi.dao.ItemDao;
 import lk.ijse.gdse.springboot.springposapi.dao.OrderDao;
 import lk.ijse.gdse.springboot.springposapi.dao.OrderDetailDao;
-import lk.ijse.gdse.springboot.springposapi.dto.OrderDetailDto;
-import lk.ijse.gdse.springboot.springposapi.dto.OrderDto;
-import lk.ijse.gdse.springboot.springposapi.entity.CustomerEntity;
-import lk.ijse.gdse.springboot.springposapi.entity.ItemEntity;
-import lk.ijse.gdse.springboot.springposapi.entity.OrderDetailEntity;
-import lk.ijse.gdse.springboot.springposapi.entity.OrderEntity;
+import lk.ijse.gdse.springboot.springposapi.dto.impl.OrderDetailDto;
+import lk.ijse.gdse.springboot.springposapi.dto.impl.OrderDto;
+import lk.ijse.gdse.springboot.springposapi.entity.impl.CustomerEntity;
+import lk.ijse.gdse.springboot.springposapi.entity.impl.ItemEntity;
+import lk.ijse.gdse.springboot.springposapi.entity.impl.OrderDetailEntity;
+import lk.ijse.gdse.springboot.springposapi.entity.impl.OrderEntity;
 import lk.ijse.gdse.springboot.springposapi.exception.CustomerNotFoundException;
 import lk.ijse.gdse.springboot.springposapi.exception.DataPersistFailedException;
 import lk.ijse.gdse.springboot.springposapi.exception.ItemNotFoundException;
+import lk.ijse.gdse.springboot.springposapi.exception.OrderNotFoundException;
+import lk.ijse.gdse.springboot.springposapi.service.OrderService;
 import lk.ijse.gdse.springboot.springposapi.util.Mapping;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class OrderServiceImpl implements OrderService{
-    @Autowired
-    private CustomerDao customerDao;
-    @Autowired
-    private ItemDao itemDao;
-    @Autowired
-    private OrderDao orderDao;
-    @Autowired
-    private OrderDetailDao orderDetailDao;
-    @Autowired
+public class OrderServiceImpl implements OrderService {
+
+    private final CustomerDao customerDao;
+    private final ItemDao itemDao;
+    private final OrderDao orderDao;
+    private final OrderDetailDao orderDetailDao;
     private final Mapping mapping;
     @Override
     public void saveOrder(OrderDto orderDto) {
@@ -68,6 +63,23 @@ public class OrderServiceImpl implements OrderService{
         orderDetailDao.saveAll(orderEntities);
     }
 
+    @Override
+    public OrderDto getOrder(Long orderId) {
+        OrderEntity orderEntity = orderDao.findById(orderId)
+                .orElseThrow(() -> new OrderNotFoundException("Order not found with ID: " + orderId));
+        OrderDto orderDto = mapping.map(orderEntity, OrderDto.class);
+        List<OrderDetailDto> orderDetailDtos = orderEntity.getOrderDetailEntities().stream()
+                .map(orderDetailEntity -> mapping.map(orderDetailEntity, OrderDetailDto.class))
+                .collect(Collectors.toList());
+        orderDto.setOrderDetailDtos(orderDetailDtos);
+        return orderDto;
+    }
+
+    @Override
+    public List<OrderDto> getAllOrders() {
+        return mapping.mapList(orderDao.findAll(), OrderDto.class); // map order entities to order dtos and return
+    }
+
     private OrderDetailEntity createOrderDetailEntity(OrderDetailDto dto, OrderEntity order, ItemEntity item) {
         return OrderDetailEntity.builder()
                 .orderEntity(order)
@@ -76,4 +88,5 @@ public class OrderServiceImpl implements OrderService{
                 .unitPrice(dto.getUnitPrice())
                 .build();
     }
+
 }

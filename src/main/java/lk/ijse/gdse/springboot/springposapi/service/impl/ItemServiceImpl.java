@@ -1,17 +1,17 @@
-package lk.ijse.gdse.springboot.springposapi.service;
+package lk.ijse.gdse.springboot.springposapi.service.impl;
 
 import jakarta.transaction.Transactional;
 import lk.ijse.gdse.springboot.springposapi.dao.ItemDao;
-import lk.ijse.gdse.springboot.springposapi.dto.ItemDto;
-import lk.ijse.gdse.springboot.springposapi.entity.ItemEntity;
+import lk.ijse.gdse.springboot.springposapi.dto.impl.ItemDto;
+import lk.ijse.gdse.springboot.springposapi.entity.impl.ItemEntity;
 import lk.ijse.gdse.springboot.springposapi.exception.DataPersistFailedException;
 import lk.ijse.gdse.springboot.springposapi.exception.ItemNotFoundException;
-import lk.ijse.gdse.springboot.springposapi.response.ItemErrorResponse;
+import lk.ijse.gdse.springboot.springposapi.response.impl.ItemErrorResponse;
 import lk.ijse.gdse.springboot.springposapi.response.ItemResponse;
+import lk.ijse.gdse.springboot.springposapi.service.ItemService;
 import lk.ijse.gdse.springboot.springposapi.util.AppUtil;
 import lk.ijse.gdse.springboot.springposapi.util.Mapping;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,9 +21,7 @@ import java.util.Optional;
 @Transactional
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
-    @Autowired
     private final ItemDao itemDao;
-    @Autowired
     private final Mapping mapping;
 
     @Override

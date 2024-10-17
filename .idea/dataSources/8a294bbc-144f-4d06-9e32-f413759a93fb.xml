@@ -1074,7 +1074,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </schema>
     <schema id="314" parent="1" name="springpos">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-10-17.12:33:25</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-10-17.14:48:45</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="315" parent="1" name="pos_system_spring">
@@ -1288,30 +1288,26 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="361" parent="323" name="updatedAt">
-      <DasType>date|0s</DasType>
-      <Position>7</Position>
-    </column>
-    <column id="362" parent="323" name="customer_id">
+    <column id="361" parent="323" name="customer_id">
       <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
-      <Position>8</Position>
+      <Position>7</Position>
     </column>
-    <foreign-key id="363" parent="323" name="FK624gtjin3po807j3vix093tlf">
+    <foreign-key id="362" parent="323" name="FK624gtjin3po807j3vix093tlf">
       <ColNames>customer_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>customer</RefTableName>
     </foreign-key>
-    <index id="364" parent="323" name="PRIMARY">
+    <index id="363" parent="323" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="365" parent="323" name="FK624gtjin3po807j3vix093tlf">
+    <index id="364" parent="323" name="FK624gtjin3po807j3vix093tlf">
       <ColNames>customer_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="366" parent="323" name="PRIMARY">
+    <key id="365" parent="323" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

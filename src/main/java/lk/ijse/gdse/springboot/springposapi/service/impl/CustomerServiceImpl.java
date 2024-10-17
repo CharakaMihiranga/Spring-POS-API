@@ -1,15 +1,17 @@
-package lk.ijse.gdse.springboot.springposapi.service;
+package lk.ijse.gdse.springboot.springposapi.service.impl;
 
 import jakarta.transaction.Transactional;
 import lk.ijse.gdse.springboot.springposapi.dao.CustomerDao;
-import lk.ijse.gdse.springboot.springposapi.dto.CustomerDto;
-import lk.ijse.gdse.springboot.springposapi.entity.CustomerEntity;
+import lk.ijse.gdse.springboot.springposapi.dto.impl.CustomerDto;
+import lk.ijse.gdse.springboot.springposapi.entity.impl.CustomerEntity;
 import lk.ijse.gdse.springboot.springposapi.exception.CustomerNotFoundException;
 import lk.ijse.gdse.springboot.springposapi.exception.DataPersistFailedException;
-import lk.ijse.gdse.springboot.springposapi.response.CustomerErrorResponse;
+import lk.ijse.gdse.springboot.springposapi.response.impl.CustomerErrorResponse;
 import lk.ijse.gdse.springboot.springposapi.response.CustomerResponse;
+import lk.ijse.gdse.springboot.springposapi.service.CustomerService;
 import lk.ijse.gdse.springboot.springposapi.util.AppUtil;
 import lk.ijse.gdse.springboot.springposapi.util.Mapping;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +22,8 @@ import java.util.Optional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class CustomerServiceImpl implements CustomerService{
-    @Autowired
-    private CustomerDao customerDao;
-    @Autowired
+public class CustomerServiceImpl implements CustomerService {
+    private final CustomerDao customerDao;
     private final Mapping mapping;
 
     @Override

@@ -1,5 +1,6 @@
-package lk.ijse.gdse.springboot.springposapi.dto;
+package lk.ijse.gdse.springboot.springposapi.dto.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 @Data
 public class OrderDetailDto {
     private Long id;
+    @JsonIgnore
     private Long orderId;
     private String itemCode;
     private int qty;
