@@ -5,6 +5,7 @@ import lk.ijse.gdse.springboot.springposapi.dto.OrderDto;
 import lk.ijse.gdse.springboot.springposapi.exception.CustomerNotFoundException;
 import lk.ijse.gdse.springboot.springposapi.exception.DataPersistFailedException;
 import lk.ijse.gdse.springboot.springposapi.exception.ItemNotFoundException;
+import lk.ijse.gdse.springboot.springposapi.response.OrderResponse;
 import lk.ijse.gdse.springboot.springposapi.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -38,6 +39,10 @@ public class OrderController {
             logger.error("Internal server error while saving order with ID: {}.", orderDto.getId(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+    @GetMapping(value = "/{orderId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public OrderResponse getOrder(@PathVariable("orderId") Long orderId){
+        return orderService.getOrder(orderId);
     }
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<OrderDto> getAllOrders(){
