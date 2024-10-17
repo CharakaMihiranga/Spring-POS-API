@@ -1,9 +1,8 @@
-package lk.ijse.gdse.springboot.springposapi.entity;
+package lk.ijse.gdse.springboot.springposapi.entity.impl;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lk.ijse.gdse.springboot.springposapi.entity.SuperEntity;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

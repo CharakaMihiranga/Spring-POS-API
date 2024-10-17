@@ -1,6 +1,6 @@
 package lk.ijse.gdse.springboot.springposapi.controller;
 
-import lk.ijse.gdse.springboot.springposapi.dto.CustomerDto;
+import lk.ijse.gdse.springboot.springposapi.dto.impl.CustomerDto;
 import lk.ijse.gdse.springboot.springposapi.exception.CustomerNotFoundException;
 import lk.ijse.gdse.springboot.springposapi.exception.DataPersistFailedException;
 import lk.ijse.gdse.springboot.springposapi.response.CustomerResponse;
@@ -8,7 +8,6 @@ import lk.ijse.gdse.springboot.springposapi.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 public class CustomerController {
-    @Autowired
     private final CustomerService customerService;
     static Logger logger = LoggerFactory.getLogger(CustomerController.class);
 

@@ -1,6 +1,7 @@
-package lk.ijse.gdse.springboot.springposapi.dto;
+package lk.ijse.gdse.springboot.springposapi.dto.impl;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lk.ijse.gdse.springboot.springposapi.dto.SuperDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
